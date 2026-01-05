@@ -162,7 +162,7 @@
                         }
                     }
                 ],
-                "Scope": "REGIONAL",
+                "Scope": "CLOUDFRONT",
                 "VisibilityConfig": {
                     "CloudWatchMetricsEnabled": true,
                     "MetricName": "catalog-api-demo-wafMetrics",
