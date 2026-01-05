@@ -1,0 +1,71 @@
+{
+    "version": "39.0.0",
+    "artifacts": {
+        "catalog-api-prod-waf.assets": {
+            "type": "cdk:asset-manifest",
+            "properties": {
+                "file": "catalog-api-prod-waf.assets.json",
+                "requiresBootstrapStackVersion": 6,
+                "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+            }
+        },
+        "catalog-api-prod-waf": {
+            "type": "aws:cloudformation:stack",
+            "environment": "aws://636503752262/us-east-1",
+            "properties": {
+                "templateFile": "catalog-api-prod-waf.template.json",
+                "terminationProtection": true,
+                "validateOnSynth": false,
+                "assumeRoleArn": "arn:${AWS::Partition}:iam::636503752262:role/cdk-hnb659fds-deploy-role-636503752262-us-east-1",
+                "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::636503752262:role/cdk-hnb659fds-cfn-exec-role-636503752262-us-east-1",
+                "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-636503752262-us-east-1/5acaf174d08a972f6ae47deced1420efdfd2ef1b0ba7b43a3abfaa71e881b02c.json",
+                "requiresBootstrapStackVersion": 6,
+                "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+                "additionalDependencies": [
+                    "catalog-api-prod-waf.assets"
+                ],
+                "lookupRole": {
+                    "arn": "arn:${AWS::Partition}:iam::636503752262:role/cdk-hnb659fds-lookup-role-636503752262-us-east-1",
+                    "requiresBootstrapStackVersion": 8,
+                    "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+                }
+            },
+            "dependencies": [
+                "catalog-api-prod-waf.assets"
+            ],
+            "metadata": {
+                "/catalog-api-prod-waf/CatalogApiProdWaf": [
+                    {
+                        "type": "aws:cdk:logicalId",
+                        "data": "CatalogApiProdWaf"
+                    }
+                ],
+                "/catalog-api-prod-waf/CDKMetadata/Default": [
+                    {
+                        "type": "aws:cdk:logicalId",
+                        "data": "CDKMetadata"
+                    }
+                ],
+                "/catalog-api-prod-waf/BootstrapVersion": [
+                    {
+                        "type": "aws:cdk:logicalId",
+                        "data": "BootstrapVersion"
+                    }
+                ],
+                "/catalog-api-prod-waf/CheckBootstrapVersion": [
+                    {
+                        "type": "aws:cdk:logicalId",
+                        "data": "CheckBootstrapVersion"
+                    }
+                ]
+            },
+            "displayName": "catalog-api-prod-waf"
+        },
+        "Tree": {
+            "type": "cdk:tree",
+            "properties": {
+                "file": "tree.json"
+            }
+        }
+    }
+}

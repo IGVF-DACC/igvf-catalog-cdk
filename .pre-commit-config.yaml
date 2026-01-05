@@ -8,7 +8,7 @@ repos:
     rev: v2.2.3
     hooks:
       - id: double-quote-string-fixer
-        exclude: waf/waf/rules.py
+        exclude: ^(dev|catalog-prod)/waf/waf/rules.py
       - id: trailing-whitespace
       - id: end-of-file-fixer
         exclude: ^(dev/waf|catalog-prod/waf)/tests/snapshots

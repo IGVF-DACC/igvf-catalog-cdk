@@ -1,0 +1,170 @@
+{
+    "Resources": {
+        "CatalogApiProdWaf": {
+            "Type": "AWS::WAFv2::WebACL",
+            "Properties": {
+                "CustomResponseBodies": {
+                    "RateLimitBody": {
+                        "Content": "{\"error\": \"Too many requests\", \"message\": \"You have exceeded request limit. Try again later.\"}",
+                        "ContentType": "APPLICATION_JSON"
+                    }
+                },
+                "DefaultAction": {
+                    "Allow": {}
+                },
+                "Rules": [
+                    {
+                        "Name": "AWS-AWSManagedRulesAmazonIpReputationList",
+                        "Priority": 100,
+                        "Statement": {
+                            "ManagedRuleGroupStatement": {
+                                "VendorName": "AWS",
+                                "Name": "AWSManagedRulesAmazonIpReputationList"
+                            }
+                        },
+                        "OverrideAction": {
+                            "None": {}
+                        },
+                        "VisibilityConfig": {
+                            "SampledRequestsEnabled": true,
+                            "CloudWatchMetricsEnabled": true,
+                            "MetricName": "catalog-api-prod-waf-AWS-AWSManagedRulesAmazonIpReputationList"
+                        }
+                    },
+                    {
+                        "Name": "AWS-AWSManagedRulesAnonymousIpList",
+                        "Priority": 200,
+                        "Statement": {
+                            "ManagedRuleGroupStatement": {
+                                "VendorName": "AWS",
+                                "Name": "AWSManagedRulesAnonymousIpList",
+                                "RuleActionOverrides": [
+                                    {
+                                        "Name": "HostingProviderIPList",
+                                        "ActionToUse": {
+                                            "Count": {}
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "OverrideAction": {
+                            "None": {}
+                        },
+                        "VisibilityConfig": {
+                            "SampledRequestsEnabled": true,
+                            "CloudWatchMetricsEnabled": true,
+                            "MetricName": "catalog-api-prod-waf-AWS-AWSManagedRulesAnonymousIpList"
+                        }
+                    },
+                    {
+                        "Name": "AWS-AWSManagedRulesKnownBadInputsRuleSet",
+                        "Priority": 300,
+                        "Statement": {
+                            "ManagedRuleGroupStatement": {
+                                "VendorName": "AWS",
+                                "Name": "AWSManagedRulesKnownBadInputsRuleSet"
+                            }
+                        },
+                        "OverrideAction": {
+                            "None": {}
+                        },
+                        "VisibilityConfig": {
+                            "SampledRequestsEnabled": true,
+                            "CloudWatchMetricsEnabled": true,
+                            "MetricName": "catalog-api-prod-waf-AWS-AWSManagedRulesKnownBadInputsRuleSet"
+                        }
+                    },
+                    {
+                        "Name": "AWS-AWSManagedRulesLinuxRuleSet",
+                        "Priority": 400,
+                        "Statement": {
+                            "ManagedRuleGroupStatement": {
+                                "VendorName": "AWS",
+                                "Name": "AWSManagedRulesLinuxRuleSet"
+                            }
+                        },
+                        "OverrideAction": {
+                            "None": {}
+                        },
+                        "VisibilityConfig": {
+                            "SampledRequestsEnabled": true,
+                            "CloudWatchMetricsEnabled": true,
+                            "MetricName": "catalog-api-prod-waf-AWS-AWSManagedRulesLinuxRuleSet"
+                        }
+                    },
+                    {
+                        "Name": "AWS-AWSManagedRulesPHPRuleSet",
+                        "Priority": 500,
+                        "Statement": {
+                            "ManagedRuleGroupStatement": {
+                                "VendorName": "AWS",
+                                "Name": "AWSManagedRulesPHPRuleSet"
+                            }
+                        },
+                        "OverrideAction": {
+                            "None": {}
+                        },
+                        "VisibilityConfig": {
+                            "SampledRequestsEnabled": true,
+                            "CloudWatchMetricsEnabled": true,
+                            "MetricName": "catalog-api-prod-waf-AWS-AWSManagedRulesPHPRuleSet"
+                        }
+                    }
+                ],
+                "Scope": "CLOUDFRONT",
+                "VisibilityConfig": {
+                    "CloudWatchMetricsEnabled": true,
+                    "MetricName": "catalog-api-prod-wafMetrics",
+                    "SampledRequestsEnabled": true
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "catalog-api-prod-waf/CatalogApiProdWaf"
+            }
+        },
+        "CDKMetadata": {
+            "Type": "AWS::CDK::Metadata",
+            "Properties": {
+                "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzS30DNUTCwv1k1OydbNyUzSqw4uSUzO1gEKxZcnppUZ6Tmn5YWnJjk6+9TqBFSWZOTn6RvrGRrqWSpmFWdm6haV5pVk5qbqBUFoANKOt+dSAAAA"
+            },
+            "Metadata": {
+                "aws:cdk:path": "catalog-api-prod-waf/CDKMetadata/Default"
+            }
+        }
+    },
+    "Parameters": {
+        "BootstrapVersion": {
+            "Type": "AWS::SSM::Parameter::Value<String>",
+            "Default": "/cdk-bootstrap/hnb659fds/version",
+            "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+        }
+    },
+    "Rules": {
+        "CheckBootstrapVersion": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Not": [
+                            {
+                                "Fn::Contains": [
+                                    [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5"
+                                    ],
+                                    {
+                                        "Ref": "BootstrapVersion"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+                }
+            ]
+        }
+    }
+}

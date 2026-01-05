@@ -1,0 +1,93 @@
+{
+    "version": "tree-0.1",
+    "tree": {
+        "id": "App",
+        "path": "",
+        "children": {
+            "catalog-api-prod-waf": {
+                "id": "catalog-api-prod-waf",
+                "path": "catalog-api-prod-waf",
+                "children": {
+                    "CatalogApiProdWaf": {
+                        "id": "CatalogApiProdWaf",
+                        "path": "catalog-api-prod-waf/CatalogApiProdWaf",
+                        "attributes": {
+                            "aws:cdk:cloudformation:type": "AWS::WAFv2::WebACL",
+                            "aws:cdk:cloudformation:props": {
+                                "customResponseBodies": {
+                                    "RateLimitBody": {
+                                        "contentType": "APPLICATION_JSON",
+                                        "content": "{\"error\": \"Too many requests\", \"message\": \"You have exceeded request limit. Try again later.\"}"
+                                    }
+                                },
+                                "defaultAction": {
+                                    "allow": {}
+                                },
+                                "scope": "CLOUDFRONT",
+                                "visibilityConfig": {
+                                    "cloudWatchMetricsEnabled": true,
+                                    "sampledRequestsEnabled": true,
+                                    "metricName": "catalog-api-prod-wafMetrics"
+                                }
+                            }
+                        },
+                        "constructInfo": {
+                            "fqn": "aws-cdk-lib.aws_wafv2.CfnWebACL",
+                            "version": "2.178.1"
+                        }
+                    },
+                    "CDKMetadata": {
+                        "id": "CDKMetadata",
+                        "path": "catalog-api-prod-waf/CDKMetadata",
+                        "children": {
+                            "Default": {
+                                "id": "Default",
+                                "path": "catalog-api-prod-waf/CDKMetadata/Default",
+                                "constructInfo": {
+                                    "fqn": "aws-cdk-lib.CfnResource",
+                                    "version": "2.178.1"
+                                }
+                            }
+                        },
+                        "constructInfo": {
+                            "fqn": "constructs.Construct",
+                            "version": "10.4.4"
+                        }
+                    },
+                    "BootstrapVersion": {
+                        "id": "BootstrapVersion",
+                        "path": "catalog-api-prod-waf/BootstrapVersion",
+                        "constructInfo": {
+                            "fqn": "aws-cdk-lib.CfnParameter",
+                            "version": "2.178.1"
+                        }
+                    },
+                    "CheckBootstrapVersion": {
+                        "id": "CheckBootstrapVersion",
+                        "path": "catalog-api-prod-waf/CheckBootstrapVersion",
+                        "constructInfo": {
+                            "fqn": "aws-cdk-lib.CfnRule",
+                            "version": "2.178.1"
+                        }
+                    }
+                },
+                "constructInfo": {
+                    "fqn": "aws-cdk-lib.Stack",
+                    "version": "2.178.1"
+                }
+            },
+            "Tree": {
+                "id": "Tree",
+                "path": "Tree",
+                "constructInfo": {
+                    "fqn": "constructs.Construct",
+                    "version": "10.4.4"
+                }
+            }
+        },
+        "constructInfo": {
+            "fqn": "aws-cdk-lib.App",
+            "version": "2.178.1"
+        }
+    }
+}

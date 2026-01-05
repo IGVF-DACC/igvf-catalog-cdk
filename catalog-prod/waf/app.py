@@ -3,7 +3,7 @@ from aws_cdk import Environment
 
 from waf.config import config
 
-from waf.constants import CATALOG_API_DEMO_WAF_PREFIX
+from waf.constants import CATALOG_API_PROD_WAF_PREFIX
 
 from waf.acl import WAF
 from waf.acl import WAFProps
@@ -18,12 +18,12 @@ ENVIRONMENT = Environment(
 
 app = App()
 
-demo_waf_catalog_api = WAF(
+prod_waf_catalog_api = WAF(
     app,
-    CATALOG_API_DEMO_WAF_PREFIX,
+    CATALOG_API_PROD_WAF_PREFIX,
     props=WAFProps(
-        rules=get_rules(CATALOG_API_DEMO_WAF_PREFIX),
-        prefix=CATALOG_API_DEMO_WAF_PREFIX,
+        rules=get_rules(CATALOG_API_PROD_WAF_PREFIX),
+        prefix=CATALOG_API_PROD_WAF_PREFIX,
         ips_to_allow=[
             # e.g. '98.35.33.121/32',
         ],

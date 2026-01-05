@@ -1,0 +1,20 @@
+{
+    "version": "39.0.0",
+    "files": {
+        "5acaf174d08a972f6ae47deced1420efdfd2ef1b0ba7b43a3abfaa71e881b02c": {
+            "source": {
+                "path": "catalog-api-prod-waf.template.json",
+                "packaging": "file"
+            },
+            "destinations": {
+                "636503752262-us-east-1": {
+                    "bucketName": "cdk-hnb659fds-assets-636503752262-us-east-1",
+                    "objectKey": "5acaf174d08a972f6ae47deced1420efdfd2ef1b0ba7b43a3abfaa71e881b02c.json",
+                    "region": "us-east-1",
+                    "assumeRoleArn": "arn:${AWS::Partition}:iam::636503752262:role/cdk-hnb659fds-file-publishing-role-636503752262-us-east-1"
+                }
+            }
+        }
+    },
+    "dockerImages": {}
+}
